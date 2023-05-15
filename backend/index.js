@@ -12,11 +12,20 @@ app.use(express.json());
 
 const MORALIS_API_KEY=process.env.MORALIS_API_KEY;
 
-//Our Endpoint
+app.get('/getwalletbalance', async (req, res) =>{
+    try{
+        const {query} =req;
+        const response = await Moralis.EvmApi.balance.getNativeBalance({
+            chain: "0xaa36a7",
+        });
+    } catch(envError) {
+
+    }
+});
+
 Moralis.start(
     {
         apiKey: MORALIS_API_KEY,
-
     }).then(() => {
         app.listen(port, () => {
             console.log('Listening for API Calls')

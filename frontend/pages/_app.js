@@ -14,6 +14,16 @@ export default function App({ Component, pageProps }) {
     [sepolia],
     [publicProvider()],
   );
-  
-  return <Component {...pageProps} />
+
+  const client = createClient({
+    autoConnect:true,
+    provider,
+    webSocketProvider,
+  });
+
+  return (
+    <WagmiConfig client={client}>
+      <Component {...pageProps} />
+    </WagmiConfig>
+  )
 }

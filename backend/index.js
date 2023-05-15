@@ -18,8 +18,10 @@ app.get('/getwalletbalance', async (req, res) =>{
         const response = await Moralis.EvmApi.balance.getNativeBalance({
             chain: "0xaa36a7",
         });
-    } catch(envError) {
-
+        return res.status(200).json(response);
+    } catch(e) {
+        console.log(`Something went wrong ${e.message}`);
+        return res.status(400).json();
     }
 });
 
